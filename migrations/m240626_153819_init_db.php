@@ -10,10 +10,10 @@ class m240626_153819_init_db extends Migration
             'id' => $this->primaryKey()->unique(),
             'name' => $this->string()->notNull(),
             'surname' => $this->string()->notNull(),
-            'login' => $this->string()->notNull(),
+            'email' => $this->string()->notNull(),
             'password' => $this->string()->notNull(),
             'create_date' => $this->timestamp()->defaultExpression("NOW()"),
-            'count_applications' => $this->integer()->defaultValue(0)
+            'is_verified' => $this->boolean()->defaultValue(false)
         ]);
 
         $this->createTable('applications', [
@@ -93,8 +93,9 @@ class m240626_153819_init_db extends Migration
 
     public function safeDown()
     {
-        echo "m240626_153819_init_db cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('comments');
+        $this->dropTable('applications');
+        $this->dropTable('statuses');
+        $this->dropTable('users');
     }
 }

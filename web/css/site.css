@@ -1,86 +1,155 @@
-main > .container {
-    padding: 70px 15px 20px;
+:root {
+    --accent-color: #192030;
+    --shadow-color: #171B24;
+    --block-color: #DFDFDF;
+    --background-color: #cfcfcf
 }
 
-.footer {
-    background-color: #f5f5f5;
-    font-size: .9em;
-    height: 60px;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
-.footer > .container {
-    padding-right: 15px;
-    padding-left: 15px;
+body {
+    overflow: hidden;
 }
 
-.not-set {
-    color: #c55;
-    font-style: italic;
+hr {
+    color: #fff;
 }
 
-a.asc:after, a.desc:after {
-    content: '';
-    left: 3px;
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border: solid 5px transparent;
-    margin: 4px 4px 2px 4px;
-    background: transparent;
+.btn {
+    padding: .3rem .6rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    outline: none;
+    background: none;
 }
 
-a.asc:after {
-    border-bottom: solid 7px #212529;
-    border-top-width: 0;
+.btn:hover {
+    background: var(--accent-color);
+    color: #fff;
 }
 
-a.desc:after {
-    border-top: solid 7px #212529;
-    border-bottom-width: 0;
-}
+main {
+    display: grid;
+    grid-template-columns: 450px auto;
+    grid-template-rows: 75px auto;
+    min-width: 100%;
+    min-height: 100svh;
+    transition: all .3s ease-in-out;
 
-.grid-view th {
-    white-space: nowrap;
-}
+    & nav {
+        grid-area: 1 / 1 / 3 / 2;
+        background: var(--accent-color);
+        box-shadow: 10px 0 30px -10px var(--shadow-color);
+        padding: 15px;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
 
-.hint-block {
-    display: block;
-    margin-top: 5px;
-    color: #999;
-}
+        & .logo {
+            margin: 0 auto;
+            display: block;
+            transition: margin .3s ease-in-out;
+        }
 
-.error-summary {
-    color: #a94442;
-    background: #fdf7f7;
-    border-left: 3px solid #eed3d7;
-    padding: 10px 20px;
-    margin: 0 0 15px 0;
-}
+        & ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 2rem 0 2rem 1rem;
+            padding: 0;
 
-.nav li > form > button.logout {
-    padding-top: 7px;
-    color: rgba(255, 255, 255, 0.5);
-}
+            & li a {
+                display: block;
+                overflow: hidden;
+                text-wrap: nowrap;
+                text-decoration: none;
+                font-size: 1.5rem;
+                color: #fff;
+                padding: 3px 0;
 
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
+                & i {
+                    width: 32px;
+                    height: 32px;
+                    margin-right: 1.5rem;
+                }
+
+                & i:before {
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            & li a:hover {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        .version {
+            margin-top: 4rem;
+            color: gray;
+            font-size: .65rem;
+            width: max-content;
+            display: block;
+            position: relative;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+        }
+    }
+
+    & header {
+        position: relative;
+        grid-area: 1 / 2 / 2 / 3;
+        background: var(--block-color);;
+        box-shadow: 0 -10px 30px -10px var(--shadow-color);
+        display: flex;
         width: 100%;
-        padding: 10px 0;
+        height: 75px;
+        padding: .5rem 1.5rem;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    & .content {
+        grid-area: 2 / 2 / 3 / 3;
+        background: var(--background-color);
+        padding: 1.5rem;
     }
 }
 
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.75);
+main.deactivate {
+    grid-template-columns: 95px auto;
+
+    & nav {
+        .logo {
+            margin: 0;
+            transition: margin .3s ease-in-out;
+        }
+    }
 }
 
-.nav > li > form > button.logout:focus {
-    outline: none;
-}
+.page {
+    padding: 1rem;
+    background: var(--block-color);
+    border-radius: 8px;
+    overflow-y: auto;
 
-.form-group {
-    margin-bottom: 1rem;
+    & .line_grafic {
+        width: 100% !important;
+        height: 750px !important;
+        display: block;
+    }
 }
