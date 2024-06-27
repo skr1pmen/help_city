@@ -10,6 +10,11 @@
     margin: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    width: none;
 }
 
 body {
@@ -126,7 +131,6 @@ main {
     & .content {
         grid-area: 2 / 2 / 3 / 3;
         background: var(--background-color);
-        padding: 1.5rem;
     }
 }
 
@@ -142,14 +146,18 @@ main.deactivate {
 }
 
 .page {
+    margin: 1.5rem;
     padding: 1rem;
     background: var(--block-color);
     border-radius: 8px;
-    overflow-y: auto;
+    width: 98%;
+    height: calc(100svh - 75px - 3rem);
+    overflow: hidden;
+    overflow-y: scroll;
 
     & .line_grafic {
         width: 100% !important;
-        height: 750px !important;
+        height: 700px !important;
         display: block;
     }
 }
