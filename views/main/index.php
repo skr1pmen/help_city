@@ -106,7 +106,7 @@ use dosamigos\chartjs\ChartJs;
                 'display' => true,
                 'position' => 'bottom',
                 'labels' => [
-                    'fontSize' => 18,
+                    'fontSize' => 12,
                     'fontColor' => "#425062",
                 ]
             ],

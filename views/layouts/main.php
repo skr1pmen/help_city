@@ -4,12 +4,7 @@
 /** @var string $content */
 
 use app\assets\AppAsset;
-use app\widgets\Alert;
 use rmrevin\yii\fontawesome\FA;
-use yii\bootstrap5\Breadcrumbs;
-use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
 
 AppAsset::register($this);
 
@@ -48,14 +43,35 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <li><a href=""><?= FA::icon('user') ?>Профиль</a></li>
                 </ul>
                 <hr>
+                <ul>
+                    <li>
+                        <label>
+                            <?= FA::icon('square', ['class' => 'btn__theme']) ?>
+                            Сменить тему
+                            <input type="checkbox" hidden="" id="theme">
+                        </label>
+                    </li>
+                </ul>
+                <hr>
                 <span class="version">Version: <?= Yii::$app->params['version'] ?></span>
             </nav>
             <header>
                 <h1><?= $this->title ?></h1>
                 <?php if (Yii::$app->user->isGuest) : ?>
-                    <a href="/user/autorization" class="btn">Войти</a>
+                    <a href="/user/authorization" class="btn">Войти</a>
                 <?php else : ?>
-                    <div class="user_block"></div>
+                    <a class="user_block" href="/user/profile?id=<?= Yii::$app->user->id ?>">
+                        <?php if (file_exists('/images/user_avatar/' . Yii::$app->user->id . 'jpg')) : ?>
+                            <img src="/images/user_avatar/'<?= Yii::$app->user->id ?>'jpg'" alt="">
+                        <?php else: ?>
+                            <div class="avatar">
+                                <?= mb_substr(Yii::$app->user->identity->name, 0, 1) ?>
+                                <?= mb_substr(Yii::$app->user->identity->surname, 0, 1) ?>
+                            </div>
+                        <?php endif; ?>
+                        <?= Yii::$app->user->identity->surname ?>
+                        <?= Yii::$app->user->identity->name ?>
+                    </a>
                 <?php endif; ?>
             </header>
             <div class="content">

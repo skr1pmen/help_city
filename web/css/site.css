@@ -2,7 +2,20 @@
     --accent-color: #192030;
     --shadow-color: #171B24;
     --block-color: #DFDFDF;
-    --background-color: #cfcfcf
+    --background-color: #cfcfcf;
+    --text-color: #000;
+    --btn-color: #192030;
+    --btn-text-color: #fff;
+}
+
+[data-theme="dark"] {
+    --accent-color: #192030;
+    --shadow-color: #171B24;
+    --block-color: #272727;
+    --background-color: #202020;
+    --text-color: #ffffff;
+    --btn-color: #fff;
+    --btn-text-color: #000;
 }
 
 * {
@@ -27,17 +40,17 @@ hr {
 
 .btn {
     padding: .3rem .6rem;
-    border: 1px solid var(--accent-color);
+    border: 1px solid var(--btn-color);
     border-radius: 8px;
-    color: var(--accent-color);
+    color: var(--btn-color);
     font-size: 1.3rem;
     outline: none;
     background: none;
 }
 
 .btn:hover {
-    background: var(--accent-color);
-    color: #fff;
+    background: var(--btn-color);
+    color: var(--btn-text-color);
 }
 
 main {
@@ -71,14 +84,20 @@ main {
             margin: 2rem 0 2rem 1rem;
             padding: 0;
 
-            & li a {
-                display: block;
-                overflow: hidden;
-                text-wrap: nowrap;
-                text-decoration: none;
-                font-size: 1.5rem;
+            & li {
                 color: #fff;
-                padding: 3px 0;
+
+                & a,
+                & label {
+                    display: block;
+                    overflow: hidden;
+                    text-wrap: nowrap;
+                    text-decoration: none;
+                    font-size: 1.5rem;
+                    color: #fff;
+                    padding: 3px 0;
+                    cursor: pointer;
+                }
 
                 & i {
                     width: 32px;
@@ -94,7 +113,9 @@ main {
                 }
             }
 
-            & li a:hover {
+            & li a:hover,
+            & li label:hover {
+                color: #0a53be;
                 background: rgba(255, 255, 255, 0.05);
                 backdrop-filter: blur(10px);
                 box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
@@ -125,7 +146,35 @@ main {
         padding: .5rem 1.5rem;
         justify-content: space-between;
         align-items: center;
+        color: var(--text-color);
 
+        & .user_block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: .5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1.4rem;
+
+            & .avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: var(--accent-color);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                font-size: 1.3rem;
+            }
+        }
+
+        & .user_block:hover {
+            background: var(--background-color);
+        }
     }
 
     & .content {
@@ -154,10 +203,79 @@ main.deactivate {
     height: calc(100svh - 75px - 3rem);
     overflow: hidden;
     overflow-y: scroll;
+    color: var(--text-color);
 
     & .line_grafic {
         width: 100% !important;
         height: 700px !important;
         display: block;
+    }
+
+    & .form__wrapper {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+
+        & .logo_block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 350px;
+            height: 500px;
+            background: var(--accent-color);
+            border: 1px solid var(--btn-color);
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        & form {
+            width: 350px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 1px solid var(--btn-color);
+            border-left: none;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 1.5rem;
+            gap: .5rem;
+
+            & .form-group {
+                width: 100%;
+
+                & .label {
+                    font-size: 1.2rem;
+                }
+
+                & input {
+                    width: 100%;
+                    outline: none;
+                    background: none;
+                    border: none;
+                    border-bottom: 1px solid var(--btn-color);
+                }
+
+                & .error {
+                    color: red;
+                }
+            }
+
+            & .password_show {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: .5rem;
+                cursor: pointer;
+            }
+
+            & button {
+                margin-top: auto;
+                width: 100%;
+            }
+        }
     }
 }

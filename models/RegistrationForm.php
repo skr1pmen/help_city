@@ -12,13 +12,11 @@ class RegistrationForm extends Model
     public $repeatPassword;
     public $name;
     public $surname;
-    public $photo;
 
     public function rules()
     {
         return [
-            [['email', 'password', 'name', 'surname', 'acceptRules'], 'required'],
-            ['photo', 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, webp', 'maxSize' => 1024 * 1024 * 5],
+            [['email', 'password', 'name', 'surname'], 'required'],
             ['email', 'email'],
             ['email', 'validateEmail'],
             ['password', 'string', 'length' => [8, 24]],
@@ -34,11 +32,10 @@ class RegistrationForm extends Model
             'repeatPassword' => 'Подтвердите пароль',
             'name' => 'Ваше имя',
             'surname' => 'Ваша фамилия',
-            'photo' => 'Ваша аватарка',
         ];
     }
 
-    public function validateLogin($attribute, $params)
+    public function validateEmail($attribute, $params)
     {
         if (!$this->hasErrors()) {
             $user = UserRepository::getUserByEmail($this->email);

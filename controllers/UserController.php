@@ -2,6 +2,11 @@
 
 namespace app\controllers;
 
+use app\entity\Users;
+use app\models\AuthorizationForm;
+use app\models\RegistrationForm;
+use app\repository\UserRepository;
+use Yii;
 use yii\web\Controller;
 
 class UserController extends Controller
@@ -16,19 +21,13 @@ class UserController extends Controller
 
         $model = new RegistrationForm();
         if ($model->load(Yii::$app->request->post())) {
-            $model->photo = UploadedFile::getInstance($model, 'photo');
             if ($model->validate()) {
                 $userId = UserRepository::createUser(
-                    $model->login,
+                    $model->email,
                     $model->password,
                     $model->name,
                     $model->surname,
-                    $model->patronymic,
                 );
-                if (!empty($model->photo)) {
-                    $file = $userId . '.' . $model->photo->extension;
-                    $model->photo->saveAs("images/users_avatars/$file");
-                }
                 if ($userId) {
                     Yii::$app->user->login(Users::findIdentity($userId));
                     return $this->goHome();
@@ -53,10 +52,15 @@ class UserController extends Controller
             return $this->goHome();
         }
 
-        $model = new AuthorisationForm();
+        $model = new AuthorizationForm();
         if ($model->load(\Yii::$app->request->post()) && $model->login()) {
             return $this->goHome();
         }
         return $this->render('authorization', ['model' => $model]);
+    }
+
+    public function actionProfile($id)
+    {
+        return $this->render('profile');
     }
 }
