@@ -6,6 +6,7 @@ use yii\base\Model;
 
 class UserDataForm extends Model
 {
+    public $avatar;
     public $name;
     public $surname;
 
@@ -14,6 +15,7 @@ class UserDataForm extends Model
         return [
             [['name', 'surname'], 'required'],
             [['name', 'surname'], 'string', 'max' => 50],
+            ['avatar', 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, webp', 'maxSize' => 1024 * 1024 * 5],
         ];
     }
 
@@ -22,6 +24,7 @@ class UserDataForm extends Model
         return [
             'name' => 'Введите имя',
             'surname' => 'Введите фамилию',
+            'avatar' => 'Загрузите аватарку'
         ];
     }
 }

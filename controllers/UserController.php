@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\entity\Users;
 use app\models\AuthorizationForm;
 use app\models\RegistrationForm;
+use app\models\UserDataForm;
 use app\repository\UserRepository;
 use Yii;
 use yii\web\Controller;
@@ -59,8 +60,20 @@ class UserController extends Controller
         return $this->render('authorization', ['model' => $model]);
     }
 
-    public function actionProfile($id)
+    public function actionProfile($id = 0)
     {
-        return $this->render('profile');
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('user/authorization');
+        }
+        if ($id === 0) $id = \Yii::$app->user->id;
+        $edit = new UserDataForm();
+
+//        Yii::$app->mailer->compose('verification/index', ['code' => $code])
+//            ->setFrom(['kiberkot.v.roymenge@gmail.com' => 'HelpCity'])
+//            ->setTo('skr1pmen@vk.com')
+//            ->setSubject('Подтверждение аккаунта HelpCity')
+//            ->send();
+
+        return $this->render('profile', ['edit' => $edit]);
     }
 }

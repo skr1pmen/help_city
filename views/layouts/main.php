@@ -1,6 +1,7 @@
 <?php
 
 /** @var yii\web\View $this */
+
 /** @var string $content */
 
 use app\assets\AppAsset;
@@ -18,12 +19,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
-<head>
-    <title><?= $this->title ?></title>
-    <?php $this->head() ?>
-</head>
+    <head>
+        <title><?= $this->title ?></title>
+        <?php $this->head() ?>
+    </head>
     <body>
-<?php $this->beginBody() ?>
+        <?php $this->beginBody() ?>
 
         <main class="deactivate">
             <nav>
@@ -40,7 +41,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <li><a href=""><?= FA::icon('home') ?>Главная страница</a></li>
                     <li><a href=""><?= FA::icon('ticket') ?>Все заявки</a></li>
                     <li><a href=""><?= FA::icon('info') ?>О проекте</a></li>
-                    <li><a href=""><?= FA::icon('user') ?>Профиль</a></li>
+                    <li><a href="/user/profile"><?= FA::icon('user') ?>Профиль</a></li>
                 </ul>
                 <hr>
                 <ul>
@@ -60,7 +61,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <?php if (Yii::$app->user->isGuest) : ?>
                     <a href="/user/authorization" class="btn">Войти</a>
                 <?php else : ?>
-                    <a class="user_block" href="/user/profile?id=<?= Yii::$app->user->id ?>">
+                    <a class="user_block" href="/user/profile">
                         <?php if (file_exists('/images/user_avatar/' . Yii::$app->user->id . 'jpg')) : ?>
                             <img src="/images/user_avatar/'<?= Yii::$app->user->id ?>'jpg'" alt="">
                         <?php else: ?>
@@ -75,11 +76,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <?php endif; ?>
             </header>
             <div class="content">
-        <?= $content ?>
-    </div>
-</main>
+                <?= $content ?>
+            </div>
+        </main>
 
-<?php $this->endBody() ?>
-</body>
+        <?php $this->endBody() ?>
+    </body>
 </html>
 <?php $this->endPage() ?>

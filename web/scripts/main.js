@@ -30,3 +30,9 @@ function switchTheme(e) {
 }
 
 toggleTheme.addEventListener('change', switchTheme, false);
+
+document.querySelector('.btn_edit').addEventListener('click', () => {
+    const edit = document.querySelector('.edit');
+    edit.style.display = 'block';
+    edit.style.position = 'absolute';
+});

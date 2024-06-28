@@ -28,10 +28,12 @@ $config = [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
-            'class' => \yii\symfonymailer\Mailer::class,
+            'class' => yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',
-            // send all mails to a file by default.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'dsn' => "smtp://{$params['adminEmail']}:{$params['emailPassword']}@smtp.gmail.com:465"
+            ]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
