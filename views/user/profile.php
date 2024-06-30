@@ -2,27 +2,21 @@
 /**
  * @var $countApplication
  * @var $edit
+ * @var $verification
  */
 
 use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap5\Modal;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
 
 ?>
-<div style="display: none" class="edit">
-    <?= FA::icon('close') ?>
-    <iframe src="user/edit"></iframe>
-</div>
-<div style="display: none;" class="verification">
-    <?= FA::icon('close') ?>
-    <iframe src="user/verification"></iframe>
-</div>
 <div class="page">
     <div class="profile__wrapper">
         <div class="profile">
             <?php if (file_exists('images/user_avatar/' . Yii::$app->user->id . '.jpg')) : ?>
-                <img src="images/user_avatar/<?= Yii::$app->user->id ?>.jpg" alt="">
+                <img src="/images/user_avatar/<?= Yii::$app->user->id ?>.jpg" alt="">
             <?php else : ?>
                 <div class="avatar">
                     <?= mb_substr(Yii::$app->user->identity->name, 0, 1) ?>
@@ -40,6 +34,7 @@ use yii\widgets\ActiveForm;
                 'toggleButton' => ['label' => FA::icon('edit') . ' Редактировать', 'class' => 'btn'],
             ]);
             ?>
+            <?php Pjax::begin(); ?>
             <?php $form = ActiveForm::begin([
                 'options' => [
                     'class' => 'form-swiper',
@@ -54,9 +49,13 @@ use yii\widgets\ActiveForm;
             ]) ?>
 
             <label class="edit_avatar">
-                <img class="ava"
-                     src="https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png?fit=512%2C512&ssl=1"
-                     alt="">
+                <?php if (file_exists('images/user_avatar/' . Yii::$app->user->id . '.jpg')) : ?>
+                    <img src="/images/user_avatar/<?= Yii::$app->user->id ?>.jpg" alt="">
+                <?php else: ?>
+                    <img class="ava"
+                         src="https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png?fit=512%2C512&ssl=1"
+                         alt="">
+                <?php endif; ?>
                 <?= $form->field($edit, 'avatar')->fileInput(['class' => 'file_input', 'style' => 'display:none']) ?>
             </label>
             <?= $form->field($edit, 'name')->textInput(['value' => Yii::$app->user->identity->name]) ?>
@@ -65,13 +64,43 @@ use yii\widgets\ActiveForm;
             <?= Html::submitButton("Сохранить", ['class' => 'btn']) ?>
 
             <?php ActiveForm::end() ?>
+            <?php Pjax::end(); ?>
             <?php
             Modal::end();
             ?>
-            <?php if (!empty($countApplication)) : ?>
-                <span class="app">Заявок: <a href="#"><?= $countApplication ?></a></span>
+            <?php if ($countApplication >= 0) : ?>
+                <span class="app">Заявок: <a
+                            href="/application/index?form_user=<?= Yii::$app->user->id ?>"><?= $countApplication ?></a></span>
             <?php else : ?>
-                <button class="btn btn_verification"><?= FA::icon('check') ?> Подтвердить аккаунт</button>
+                <?php
+                Modal::begin([
+                    'title' => '<h2>Подтверждение аккаунта</h2>',
+                    'toggleButton' => ['label' => FA::icon('check') . ' Подтвердить аккаунт', 'class' => 'btn'],
+                ]);
+                ?>
+                <?php Pjax::begin(); ?>
+                <?php $form = ActiveForm::begin([
+                    'options' => [
+                        'class' => 'form-swiper',
+                        'enctype' => 'multipart/form-data'
+                    ],
+                    'fieldConfig' => [
+                        'template' => "{label}<br>{input}<br>{error}",
+                        'labelOptions' => ['class' => 'label'],
+                        'inputOptions' => ['class' => 'input'],
+                        'errorOptions' => ['class' => 'error'],
+                    ],
+                ]) ?>
+
+                <?= $form->field($verification, 'code')->textInput(['maxlength' => 6]) ?>
+
+                <?= Html::submitButton("Подтвердить", ['class' => 'btn']) ?>
+
+                <?php ActiveForm::end() ?>
+                <?php Pjax::end(); ?>
+                <?php
+                Modal::end();
+                ?>
             <?php endif; ?>
         </div>
     </div>

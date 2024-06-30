@@ -16,14 +16,31 @@ class UserRepository
         return Users::findOne(['email' => $email]);
     }
 
-    public static function createUser($email, $password, $name, $surname)
+    public static function createUser($email, $password, $name, $surname, $code)
     {
         $user = new Users();
         $user->email = $email;
         $user->password = password_hash($password, PASSWORD_DEFAULT);
         $user->name = $name;
         $user->surname = $surname;
+        $user->verification_code = $code;
         $user->save();
         return $user->id;
+    }
+
+    public static function editDataUser($id, $name, $surname)
+    {
+        $user = UserRepository::getUserById($id);
+        $user->name = $name;
+        $user->surname = $surname;
+        $user->update();
+    }
+
+    public static function verification($id)
+    {
+        $user = UserRepository::getUserById($id);
+        $user->is_verified = true;
+        $user->verification_code = null;
+        $user->update();
     }
 }

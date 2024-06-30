@@ -22,9 +22,9 @@ class UserDataForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => 'Введите имя',
-            'surname' => 'Введите фамилию',
-            'avatar' => 'Загрузите аватарку'
+            'name' => 'Имя',
+            'surname' => 'Фамилию',
+            'avatar' => 'Выберите аватарку'
         ];
     }
 }

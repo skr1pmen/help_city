@@ -7,6 +7,8 @@
 use app\assets\AppAsset;
 use rmrevin\yii\fontawesome\FA;
 
+$notification = Yii::$app->session->get('notification');
+
 AppAsset::register($this);
 
 $this->registerCsrfMetaTags();
@@ -62,8 +64,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <a href="/user/authorization" class="btn">Войти</a>
                 <?php else : ?>
                     <a class="user_block" href="/user/profile">
-                        <?php if (file_exists('/images/user_avatar/' . Yii::$app->user->id . 'jpg')) : ?>
-                            <img src="/images/user_avatar/'<?= Yii::$app->user->id ?>'jpg'" alt="">
+                        <?php if (file_exists('images/user_avatar/' . Yii::$app->user->id . '.jpg')) : ?>
+                            <img src="/images/user_avatar/<?= Yii::$app->user->id ?>.jpg" alt="">
                         <?php else: ?>
                             <div class="avatar">
                                 <?= mb_substr(Yii::$app->user->identity->name, 0, 1) ?>
@@ -77,10 +79,14 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             </header>
             <div class="content">
                 <?= $content ?>
+                <?php if ($notification) : ?>
+                    <div class="notification <?= $notification['status'] ? 'true' : 'false' ?>"><?= $notification['message'] ?></div>
+                <?php endif; ?>
             </div>
         </main>
 
         <?php $this->endBody() ?>
     </body>
 </html>
+<?php unset($_SESSION['notification']); ?>
 <?php $this->endPage() ?>

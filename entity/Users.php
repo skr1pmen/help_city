@@ -14,6 +14,7 @@ use yii\web\IdentityInterface;
  * @property string password
  * @property string create_date
  * @property boolean is_verified
+ * @property integer verification_code
  */
 class Users extends ActiveRecord implements IdentityInterface
 {

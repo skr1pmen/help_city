@@ -46,6 +46,10 @@ hr {
     font-size: 1.3rem;
     outline: none;
     background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .btn:hover {
@@ -159,10 +163,12 @@ main {
             color: var(--text-color);
             font-size: 1.4rem;
 
-            & .avatar {
+            & .avatar,
+            & img {
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
+                object-fit: cover;
                 background: var(--accent-color);
                 display: flex;
                 justify-content: center;
@@ -298,6 +304,7 @@ main.deactivate {
             grid-area: 1 / 1 / 4 / 2;
             width: 225px;
             aspect-ratio: 1;
+            object-fit: cover;
             background: var(--accent-color);
             border-radius: 50%;
             margin: 0 auto;
@@ -322,17 +329,98 @@ main.deactivate {
 
         & .form-swiper {
             display: flex;
+            gap: .5rem;
             width: 100%;
             flex-direction: column;
 
             & .input {
                 width: 100%;
+                outline: none;
+                border: none;
+                border-bottom: 1px solid var(--accent-color);
+            }
+
+            & .edit_avatar {
+                cursor: pointer;
             }
 
             & .edit_avatar label {
                 width: 100%;
                 text-align: center;
             }
+        }
+    }
+}
+
+.content {
+    position: relative;
+
+    & .notification {
+        position: absolute;
+        right: 30px;
+        bottom: 30px;
+        /*padding: 2rem 4rem;*/
+        width: 350px;
+        height: 75px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: anim_end .5s 5.5s ease-in-out forwards;
+        font-size: 1.1rem;
+        color: #fff;
+    }
+
+    & .notification:after {
+        content: "";
+        width: 100%;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.25);
+        position: absolute;
+        top: 0;
+        right: 0;
+        animation: notification_timer 5s linear forwards;
+    }
+
+    & .notification.true {
+        background: #78aa28;
+    }
+
+    & .notification.false {
+        background: #930a0d;
+    }
+}
+
+@keyframes notification_timer {
+    to {
+        width: 0;
+    }
+}
+
+@keyframes anim_end {
+    to {
+        transform: translateX(150%);
+        display: none
+    }
+}
+
+.verification__wrapper {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        & input {
+            width: 100%;
+            outline: none;
+            border: none;
+            background: none;
+            border-bottom: 1px solid var(--accent-color);
         }
     }
 }

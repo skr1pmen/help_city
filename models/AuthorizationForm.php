@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\repository\UserRepository;
+use Yii;
 use yii\base\Model;
 
 class AuthorizationForm extends Model
