@@ -16,6 +16,8 @@ if (currentTheme) {
 
     if (currentTheme === 'dark') {
         toggleTheme.checked = true;
+        document.querySelector('.btn__theme').classList.remove('fa-sun');
+        document.querySelector('.btn__theme').classList.add('fa-moon');
     }
 }
 
@@ -23,9 +25,13 @@ function switchTheme(e) {
     if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
+        document.querySelector('.btn__theme').classList.remove('fa-sun');
+        document.querySelector('.btn__theme').classList.add('fa-moon');
     } else {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
+        document.querySelector('.btn__theme').classList.remove('fa-moon');
+        document.querySelector('.btn__theme').classList.add('fa-sun');
     }
 }
 

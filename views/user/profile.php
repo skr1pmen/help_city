@@ -5,7 +5,6 @@
  * @var $verification
  */
 
-use rmrevin\yii\fontawesome\FA;
 use yii\bootstrap5\Modal;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -31,7 +30,7 @@ use yii\widgets\Pjax;
             <?php
             Modal::begin([
                 'title' => '<h2>Изменение данных</h2>',
-                'toggleButton' => ['label' => FA::icon('edit') . ' Редактировать', 'class' => 'btn'],
+                'toggleButton' => ['label' => "<i class='fa-regular fa-pen-to-square'></i>" . 'Редактировать', 'class' => 'btn'],
             ]);
             ?>
             <?php Pjax::begin(); ?>
@@ -68,14 +67,14 @@ use yii\widgets\Pjax;
             <?php
             Modal::end();
             ?>
-            <?php if ($countApplication >= 0) : ?>
+            <?php if (empty($verification)) : ?>
                 <span class="app">Заявок: <a
                             href="/application/index?form_user=<?= Yii::$app->user->id ?>"><?= $countApplication ?></a></span>
             <?php else : ?>
                 <?php
                 Modal::begin([
                     'title' => '<h2>Подтверждение аккаунта</h2>',
-                    'toggleButton' => ['label' => FA::icon('check') . ' Подтвердить аккаунт', 'class' => 'btn'],
+                    'toggleButton' => ['label' => "<i class='fa-regular fa-circle-check'></i>" . 'Подтвердить аккаунт', 'class' => 'btn'],
                 ]);
                 ?>
                 <?php Pjax::begin(); ?>

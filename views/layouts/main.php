@@ -5,7 +5,6 @@
 /** @var string $content */
 
 use app\assets\AppAsset;
-use rmrevin\yii\fontawesome\FA;
 
 $notification = Yii::$app->session->get('notification');
 
@@ -40,16 +39,20 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 </a>
                 <hr>
                 <ul>
-                    <li><a href=""><?= FA::icon('home') ?>Главная страница</a></li>
-                    <li><a href=""><?= FA::icon('ticket') ?>Все заявки</a></li>
-                    <li><a href=""><?= FA::icon('info') ?>О проекте</a></li>
-                    <li><a href="/user/profile"><?= FA::icon('user') ?>Профиль</a></li>
+                    <li><a class="<?= trim($_SERVER['REQUEST_URI'], '/') === '' ? 'active' : null ?>" href="/"><i
+                                    class="fa-solid fa-house"></i>Главная страница</a></li>
+                    <li><a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'application/index' ? 'active' : null ?>"
+                           href=""><i class="fa-solid fa-ticket"></i>Все заявки</a></li>
+                    <li><a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'help/index' ? 'active' : null ?>" href=""><i
+                                    class="fa-solid fa-circle-info"></i>О проекте</a></li>
+                    <li><a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'user/profile' ? 'active' : null ?>"
+                           href="/user/profile"><i class="fa-solid fa-user"></i>Профиль</a></li>
                 </ul>
                 <hr>
                 <ul>
                     <li>
                         <label>
-                            <?= FA::icon('square', ['class' => 'btn__theme']) ?>
+                            <i class="btn__theme fa-regular fa-sun"></i>
                             Сменить тему
                             <input type="checkbox" hidden="" id="theme">
                         </label>
@@ -63,18 +66,21 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <?php if (Yii::$app->user->isGuest) : ?>
                     <a href="/user/authorization" class="btn">Войти</a>
                 <?php else : ?>
-                    <a class="user_block" href="/user/profile">
-                        <?php if (file_exists('images/user_avatar/' . Yii::$app->user->id . '.jpg')) : ?>
-                            <img src="/images/user_avatar/<?= Yii::$app->user->id ?>.jpg" alt="">
-                        <?php else: ?>
-                            <div class="avatar">
-                                <?= mb_substr(Yii::$app->user->identity->name, 0, 1) ?>
-                                <?= mb_substr(Yii::$app->user->identity->surname, 0, 1) ?>
-                            </div>
-                        <?php endif; ?>
-                        <?= Yii::$app->user->identity->surname ?>
-                        <?= Yii::$app->user->identity->name ?>
-                    </a>
+                    <div class="user_nav">
+                        <a class="user_block" href="/user/profile">
+                            <?php if (file_exists('images/user_avatar/' . Yii::$app->user->id . '.jpg')) : ?>
+                                <img src="/images/user_avatar/<?= Yii::$app->user->id ?>.jpg" alt="">
+                            <?php else: ?>
+                                <div class="avatar">
+                                    <?= mb_substr(Yii::$app->user->identity->name, 0, 1) ?>
+                                    <?= mb_substr(Yii::$app->user->identity->surname, 0, 1) ?>
+                                </div>
+                            <?php endif; ?>
+                            <?= Yii::$app->user->identity->surname ?>
+                            <?= Yii::$app->user->identity->name ?>
+                        </a>
+                        <a class="logout" href="/user/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                    </div>
                 <?php endif; ?>
             </header>
             <div class="content">

@@ -118,11 +118,16 @@ main {
             }
 
             & li a:hover,
-            & li label:hover {
+            & li label:hover,
+            & .active {
                 color: #0a53be;
                 background: rgba(255, 255, 255, 0.05);
                 backdrop-filter: blur(10px);
                 box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+            }
+
+            & .active {
+                color: #fff;
             }
         }
 
@@ -152,6 +157,26 @@ main {
         align-items: center;
         color: var(--text-color);
 
+        & .user_nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+
+            & .logout {
+                padding: .5rem 1rem;
+                width: 4.125rem;
+                height: 4.125rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.4rem;
+                text-decoration: none;
+                color: var(--text-color);
+                border-radius: .5rem;
+            }
+        }
+
         & .user_block {
             display: flex;
             justify-content: center;
@@ -178,7 +203,8 @@ main {
             }
         }
 
-        & .user_block:hover {
+        & .user_block:hover,
+        & .logout:hover {
             background: var(--background-color);
         }
     }
@@ -193,9 +219,14 @@ main.deactivate {
     grid-template-columns: 95px auto;
 
     & nav {
-        .logo {
+        & .logo {
             margin: 0;
             transition: margin .3s ease-in-out;
+        }
+
+        & .active {
+            color: #fff;
+            margin-right: 15px;
         }
     }
 }
