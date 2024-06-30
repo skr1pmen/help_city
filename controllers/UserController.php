@@ -94,12 +94,6 @@ class UserController extends Controller
         if (!empty($code)) {
             $verification = new VerificationForm();
 
-            Yii::$app->mailer->compose('verification/index', ['code' => $code])
-                ->setFrom(['kiberkot.v.roymenge@gmail.com' => 'HelpCity'])
-                ->setTo(Yii::$app->user->identity->email)
-                ->setSubject('Подтверждение аккаунта HelpCity')
-                ->send();
-
             if ($verification->load(\Yii::$app->request->post()) && $verification->validate()) {
                 UserRepository::verification(Yii::$app->user->id);
                 Yii::$app->session->set('notification', ['status' => true, 'message' => 'Верификация успешно прошла!']);
@@ -112,5 +106,18 @@ class UserController extends Controller
 
             return $this->render('profile', ['edit' => $edit, 'countApplication' => $countApplication]);
         }
+    }
+
+    public function actionVerification()
+    {
+        $code = Yii::$app->user->identity->verification_code;
+
+        Yii::$app->mailer->compose('verification/index', ['code' => $code])
+            ->setFrom(['kiberkot.v.roymenge@gmail.com' => 'HelpCity'])
+            ->setTo(Yii::$app->user->identity->email)
+            ->setSubject('Подтверждение аккаунта HelpCity')
+            ->send();
+
+        return $this->render('verification');
     }
 }

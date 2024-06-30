@@ -36,3 +36,9 @@ function switchTheme(e) {
 }
 
 toggleTheme.addEventListener('change', switchTheme, false);
+
+
+document.querySelector('.btn_verification').addEventListener('click', () => {
+    document.querySelector('.btn_verification').remove();
+    document.querySelector('.form_deactivate').classList.remove('form_deactivate');
+})

@@ -78,9 +78,13 @@ use yii\widgets\Pjax;
                 ]);
                 ?>
                 <?php Pjax::begin(); ?>
+
+                <a href="/user/verification" target="_blank" class="btn btn_verification"><i
+                            class="fa-regular fa-envelope"></i> Отправить письмо</a>
+
                 <?php $form = ActiveForm::begin([
                     'options' => [
-                        'class' => 'form-swiper',
+                        'class' => 'form-swiper form_deactivate',
                         'enctype' => 'multipart/form-data'
                     ],
                     'fieldConfig' => [
@@ -92,6 +96,7 @@ use yii\widgets\Pjax;
                 ]) ?>
 
                 <?= $form->field($verification, 'code')->textInput(['maxlength' => 6]) ?>
+                <a href="/user/verification">Отправить письмо повторно</a>
 
                 <?= Html::submitButton("Подтвердить", ['class' => 'btn']) ?>
 

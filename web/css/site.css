@@ -380,6 +380,10 @@ main.deactivate {
                 text-align: center;
             }
         }
+
+        & .form_deactivate {
+            display: none;
+        }
     }
 }
 
