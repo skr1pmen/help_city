@@ -15,6 +15,7 @@ use yii\web\IdentityInterface;
  * @property string create_date
  * @property boolean is_verified
  * @property integer verification_code
+ * @property integer city_id
  */
 class Users extends ActiveRecord implements IdentityInterface
 {
@@ -48,5 +49,10 @@ class Users extends ActiveRecord implements IdentityInterface
 
     public function validateAuthKey($authKey)
     {
+    }
+
+    public function getCity()
+    {
+        return $this->hasOne(Cities::class, ['city_id' => 'id']);
     }
 }

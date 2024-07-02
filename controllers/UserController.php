@@ -8,6 +8,7 @@ use app\models\RegistrationForm;
 use app\models\UserDataForm;
 use app\models\VerificationForm;
 use app\repository\ApplicationRepository;
+use app\repository\CityRepository;
 use app\repository\UserRepository;
 use Yii;
 use yii\web\Controller;
@@ -22,25 +23,33 @@ class UserController extends Controller
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+        $city = CityRepository::getCities();
+        $cityList = [];
+        foreach ($city as $item) {
+            $cityList[$item['id']] = $item['name'];
+        }
 
         $model = new RegistrationForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
+                var_dump($model);
                 $userId = UserRepository::createUser(
                     $model->email,
                     $model->password,
                     $model->name,
                     $model->surname,
-                    $code = mt_rand(100000, 999999)
+                    mt_rand(100000, 999999),
+                    CityRepository::getCityId($model->city)
                 );
                 if ($userId) {
                     Yii::$app->user->login(Users::findIdentity($userId));
+                    Yii::$app->session->set('notification', ['status' => true, 'message' => 'Регистрация прошла успешно!']);
                     return $this->goHome();
                 }
             }
         }
 
-        return $this->render('registration', ['model' => $model]);
+        return $this->render('registration', ['model' => $model, 'cities' => $cityList]);
     }
 
     public function actionLogout()
@@ -73,13 +82,20 @@ class UserController extends Controller
         if ($id === 0) $id = \Yii::$app->user->id;
         $edit = new UserDataForm();
 
+        $city = CityRepository::getCities();
+        $cityList = [];
+        foreach ($city as $item) {
+            $cityList[$item['id']] = $item['name'];
+        }
+
         if ($edit->load(\Yii::$app->request->post())) {
             $edit->avatar = UploadedFile::getInstance($edit, 'avatar');
             if ($edit->validate()) {
                 UserRepository::editDataUser(
                     Yii::$app->user->id,
                     $edit->name,
-                    $edit->surname
+                    $edit->surname,
+                    $edit->city,
                 );
                 if (!empty($edit->avatar)) {
                     $file = Yii::$app->user->id . '.jpg';
@@ -100,11 +116,11 @@ class UserController extends Controller
                 return $this->redirect('/user/profile');
             }
 
-            return $this->render('profile', ['edit' => $edit, 'verification' => $verification]);
+            return $this->render('profile', ['edit' => $edit, 'cities' => $cityList, 'verification' => $verification]);
         } else {
             $countApplication = ApplicationRepository::getCountApplicationUser(Yii::$app->user->id);
 
-            return $this->render('profile', ['edit' => $edit, 'countApplication' => $countApplication]);
+            return $this->render('profile', ['edit' => $edit, 'cities' => $cityList, 'countApplication' => $countApplication]);
         }
     }
 

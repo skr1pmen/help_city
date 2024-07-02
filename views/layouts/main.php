@@ -39,14 +39,32 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 </a>
                 <hr>
                 <ul>
-                    <li><a class="<?= trim($_SERVER['REQUEST_URI'], '/') === '' ? 'active' : null ?>" href="/"><i
-                                    class="fa-solid fa-house"></i>Главная страница</a></li>
-                    <li><a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'application/index' ? 'active' : null ?>"
-                           href=""><i class="fa-solid fa-ticket"></i>Все заявки</a></li>
-                    <li><a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'help/index' ? 'active' : null ?>" href=""><i
-                                    class="fa-solid fa-circle-info"></i>О проекте</a></li>
-                    <li><a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'user/profile' ? 'active' : null ?>"
-                           href="/user/profile"><i class="fa-solid fa-user"></i>Профиль</a></li>
+                    <li>
+                        <a class="<?= trim($_SERVER['REQUEST_URI'], '/') === '' ? 'active' : null ?>" href="/">
+                            <i class="fa-solid fa-house"></i>
+                            Главная страница
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'application/index' ? 'active' : null ?>"
+                           href="/application/index">
+                            <i class="fa-solid fa-ticket"></i>
+                            Все заявки
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'help/index' ? 'active' : null ?>" href="">
+                            <i class="fa-solid fa-circle-info"></i>
+                            О проекте
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'user/profile' ? 'active' : null ?>"
+                           href="/user/profile">
+                            <i class="fa-solid fa-user"></i>
+                            Профиль
+                        </a>
+                    </li>
                 </ul>
                 <hr>
                 <ul>

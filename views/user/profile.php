@@ -3,6 +3,7 @@
  * @var $countApplication
  * @var $edit
  * @var $verification
+ * @var $cities
  */
 
 use yii\bootstrap5\Modal;
@@ -59,7 +60,12 @@ use yii\widgets\Pjax;
             </label>
             <?= $form->field($edit, 'name')->textInput(['value' => Yii::$app->user->identity->name]) ?>
             <?= $form->field($edit, 'surname')->textInput(['value' => Yii::$app->user->identity->surname]) ?>
-
+            <?= $form->field($edit, 'city')->textInput(['list' => 'datalist', 'value' => $cities[Yii::$app->user->identity->city_id]]) ?>
+            <datalist id="datalist">
+                <?php foreach ($cities as $key => $value) : ?>
+                    <option><?= $value ?></option>
+                <?php endforeach; ?>
+            </datalist>
             <?= Html::submitButton("Сохранить", ['class' => 'btn']) ?>
 
             <?php ActiveForm::end() ?>

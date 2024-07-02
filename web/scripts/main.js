@@ -38,7 +38,18 @@ function switchTheme(e) {
 toggleTheme.addEventListener('change', switchTheme, false);
 
 
-document.querySelector('.btn_verification').addEventListener('click', () => {
-    document.querySelector('.btn_verification').remove();
-    document.querySelector('.form_deactivate').classList.remove('form_deactivate');
-})
+try {
+    document.querySelector('.btn_verification').addEventListener('click', () => {
+        document.querySelector('.btn_verification').remove();
+        document.querySelector('.form_deactivate').classList.remove('form_deactivate');
+    })
+} catch (e) {
+    console.log(e)
+}
+
+let swiper = new Swiper(".mySwiper", {
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+});

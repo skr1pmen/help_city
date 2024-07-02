@@ -10,4 +10,24 @@ class ApplicationRepository
     {
         return count(Applications::findAll(['user_id' => $user_id]));
     }
+
+    public static function getAllApplication($user_id)
+    {
+        if ($user_id) {
+            return Applications::findAll(['user_id' => $user_id]);
+        }
+        return Applications::find()->all();
+    }
+
+    public static function create($title, $description, $address, $user_id, $city_id)
+    {
+        $application = new Applications();
+        $application->title = $title;
+        $application->description = $description;
+        $application->address = $address;
+        $application->user_id = $user_id;
+        $application->city_id = $city_id;
+        $application->save();
+        return $application->id;
+    }
 }

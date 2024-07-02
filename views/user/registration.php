@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $model
+ * @var $cities
  */
 
 use rmrevin\yii\fontawesome\FA;
@@ -28,6 +29,12 @@ use yii\widgets\ActiveForm;
         ]) ?>
         <?= $form->field($model, 'name')->textInput() ?>
         <?= $form->field($model, 'surname')->textInput() ?>
+        <?= $form->field($model, 'city')->textInput(['list' => 'datalist']) ?>
+        <datalist id="datalist">
+            <?php foreach ($cities as $key => $value) : ?>
+                <option><?= $value ?></option>
+            <?php endforeach; ?>
+        </datalist>
         <?= $form->field($model, 'email')->textInput() ?>
         <?= $form->field($model, 'password')->passwordInput(['class' => 'password']) ?>
         <?= $form->field($model, 'repeatPassword')->passwordInput(['class' => 'password']) ?>
