@@ -40,26 +40,30 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <hr>
                 <ul>
                     <li>
-                        <a class="<?= trim($_SERVER['REQUEST_URI'], '/') === '' ? 'active' : null ?>" href="/">
+                        <a draggable="false" class="<?= trim($_SERVER['REQUEST_URI'], '/') === '' ? 'active' : null ?>"
+                           href="/">
                             <i class="fa-solid fa-house"></i>
                             Главная страница
                         </a>
                     </li>
                     <li>
-                        <a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'application/index' ? 'active' : null ?>"
+                        <a draggable="false"
+                           class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'application/index' ? 'active' : null ?>"
                            href="/application/index">
                             <i class="fa-solid fa-ticket"></i>
                             Все заявки
                         </a>
                     </li>
                     <li>
-                        <a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'help/index' ? 'active' : null ?>" href="">
+                        <a draggable="false"
+                           class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'help/index' ? 'active' : null ?>" href="">
                             <i class="fa-solid fa-circle-info"></i>
                             О проекте
                         </a>
                     </li>
                     <li>
-                        <a class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'user/profile' ? 'active' : null ?>"
+                        <a draggable="false"
+                           class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'user/profile' ? 'active' : null ?>"
                            href="/user/profile">
                             <i class="fa-solid fa-user"></i>
                             Профиль
@@ -68,7 +72,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 </ul>
                 <hr>
                 <ul>
-                    <li>
+                    <li draggable="false">
                         <label>
                             <i class="btn__theme fa-regular fa-sun"></i>
                             Сменить тему
@@ -85,7 +89,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <a href="/user/authorization" class="btn">Войти</a>
                 <?php else : ?>
                     <div class="user_nav">
-                        <a class="user_block" href="/user/profile">
+                        <a class="user_block" draggable="false" href="/user/profile">
                             <?php if (file_exists('images/user_avatar/' . Yii::$app->user->id . '.jpg')) : ?>
                                 <img src="/images/user_avatar/<?= Yii::$app->user->id ?>.jpg" alt="">
                             <?php else: ?>

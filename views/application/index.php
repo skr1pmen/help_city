@@ -9,31 +9,13 @@
     <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->is_verified) : ?>
         <a href="/application/create" class="btn btn-create"><i class="fa-solid fa-plus"></i>Создать заявку</a>
     <?php endif; ?>
-    <!--    --><?php //var_dump($applications); ?>
     <div class="application__wrapper">
         <?php foreach ($applications as $application) : ?>
             <div class="app_card">
-                <!--                --><?php //=
-                //                SwiperSlider::widget([
-                //                    'slides' => [
-                //                        '<img src="https://swiperjs.com/demos/images/nature-1.jpg">',
-                //                        '<img src="https://swiperjs.com/demos/images/nature-2.jpg">'
-                //                    ],
-                //                    'clientOptions' => [
-                //                        'autoplay' => true,
-                //                        'loop' => true,
-                //                        'slidesPerView' => 1,
-                //                        'pagination' => [
-                //                            'clickable' => true,
-                //                        ],
-                //                        "scrollbar" => [
-                //                            "el" => SwiperSlider::getItemCssClass(SwiperSlider::SCROLLBAR),
-                //                            "hide" => false,
-                //                        ],
-                //                    ],
-                //                    'showScrollbar' => false,
-                //                ]);
-                //                ?>
+                <img src="/images/applications/<?= $application->id ?>/<?= $application->id ?>_1.jpg" alt="">
+                <h3><?= $application->title ?></h3>
+                <span><?= $application->description ?></span>
+                <a href="/application/app?id=<?= $application->id ?>" class="btn">Подробнее</a>
             </div>
         <?php endforeach; ?>
     </div>

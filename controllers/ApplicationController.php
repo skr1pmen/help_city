@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\CreateApplicationForm;
 use app\repository\ApplicationRepository;
 use app\repository\CityRepository;
+use app\repository\StatusRepository;
 use Yii;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -94,5 +95,14 @@ class ApplicationController extends Controller
         }
 
         return $this->render('create', ['model' => $model]);
+    }
+
+    public function actionApp($id)
+    {
+        $app = ApplicationRepository::getApplication($id);
+        $this->view->title = $app->title;
+        $status = StatusRepository::getStatus($app->status_id);
+
+        return $this->render('app', ['app' => $app, 'status' => $status]);
     }
 }

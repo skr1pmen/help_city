@@ -19,6 +19,11 @@ class ApplicationRepository
         return Applications::find()->all();
     }
 
+    public static function getApplication($id)
+    {
+        return Applications::findOne(['id' => $id]);
+    }
+
     public static function create($title, $description, $address, $user_id, $city_id)
     {
         $application = new Applications();
