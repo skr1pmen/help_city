@@ -23,6 +23,6 @@ class CityRepository
 
     public static function getCityById($id)
     {
-        return Cities::findOne($id)->name;
+        return Cities::findOne(['id' => $id])->name;
     }
 }

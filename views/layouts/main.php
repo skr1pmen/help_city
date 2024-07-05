@@ -56,7 +56,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     </li>
                     <li>
                         <a draggable="false"
-                           class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'help/index' ? 'active' : null ?>" href="">
+                           class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'help/index' ? 'active' : null ?>"
+                           href="/help/index">
                             <i class="fa-solid fa-circle-info"></i>
                             О проекте
                         </a>

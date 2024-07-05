@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\repository\MainRepository;
 use yii\web\Controller;
 
 class MainController extends Controller
@@ -9,6 +10,17 @@ class MainController extends Controller
     public function actionIndex()
     {
         $this->view->title = "Главная страница";
-        return $this->render('index');
+
+        $created = MainRepository::createdApplication();
+        $processing = MainRepository::processingApplication();
+        $atWork = MainRepository::atWorkApplication();
+        $resolved = MainRepository::resolvedApplication();
+
+        return $this->render('index', [
+            'created' => $created,
+            'processing' => $processing,
+            'atWork' => $atWork,
+            'resolved' => $resolved,
+        ]);
     }
 }

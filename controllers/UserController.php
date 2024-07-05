@@ -73,13 +73,19 @@ class UserController extends Controller
         return $this->render('authorization', ['model' => $model]);
     }
 
-    public function actionProfile($id = 0)
+    public function actionProfile($id = null)
     {
         $this->view->title = "Профиль";
         if (Yii::$app->user->isGuest) {
             return $this->redirect('user/authorization');
         }
-        if ($id === 0) $id = \Yii::$app->user->id;
+        if ($id != Yii::$app->user->id && !empty($id)) {
+            $data = UserRepository::getUserById($id);
+            $countApplication = ApplicationRepository::getCountApplicationUser($id);
+            return $this->render('profile', ['data' => $data, 'countApplication' => $countApplication]);
+
+        }
+
         $edit = new UserDataForm();
 
         $city = CityRepository::getCities();

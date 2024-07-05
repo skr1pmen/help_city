@@ -569,7 +569,18 @@ main.deactivate {
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            min-height: 4.5rem;
         }
+    }
+
+    & .not_application {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
     }
 }
 
@@ -662,5 +673,18 @@ main.deactivate {
 
     & .status_4 {
         color: #167a00;
+    }
+}
+
+.help__wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+
+    & span {
+        max-width: 50%;
     }
 }
