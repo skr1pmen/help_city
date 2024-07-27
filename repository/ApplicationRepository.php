@@ -35,4 +35,19 @@ class ApplicationRepository
         $application->save();
         return $application->id;
     }
+
+    public static function edit($id, $title, $description, $address)
+    {
+        $application = ApplicationRepository::getApplication($id);
+        $application->title = $title;
+        $application->description = $description;
+        $application->address = $address;
+        $application->update();
+    }
+
+    public static function delete($id)
+    {
+        $application = ApplicationRepository::getApplication($id);
+        $application->delete();
+    }
 }

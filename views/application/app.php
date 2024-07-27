@@ -6,7 +6,6 @@
 
 use coderius\swiperslider\SwiperSlider;
 
-//var_dump($app);
 $slides = [];
 array_push($slides, "<img draggable='false' src='/images/applications/{$app->id}/{$app->id}_1.jpg'>");
 if (file_exists("images/applications/{$app->id}/{$app->id}_2.jpg")) {
@@ -52,5 +51,11 @@ if (file_exists("images/applications/{$app->id}/{$app->id}_4.jpg")) {
             <img draggable="false" src="/images/applications/<?= $app->id ?>/map.png" alt="">
         </div>
         <span class="status status_<?= $app->status_id ?>"><?= $status ?></span>
+        <?php if ($app->user_id === Yii::$app->user->id): ?>
+            <div class="fun_btn">
+                <a href="/application/edit?id=<?= $app->id ?>" class="btn">Редактировать</a>
+                <a href="/application/delete?id=<?= $app->id ?>" class="btn">Удалить заявку</a>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
