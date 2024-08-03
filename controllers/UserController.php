@@ -77,7 +77,7 @@ class UserController extends Controller
     {
         $this->view->title = "Профиль";
         if (Yii::$app->user->isGuest) {
-            return $this->redirect('user/authorization');
+            return $this->redirect('/user/authorization');
         }
         if ($id != Yii::$app->user->id && !empty($id)) {
             $data = UserRepository::getUserById($id);
