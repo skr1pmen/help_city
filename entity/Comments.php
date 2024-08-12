@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
  */
 class Comments extends ActiveRecord
 {
-    public function getUser()
+    public function getUser() // Получение данных пользователя
     {
         return $this->hasOne(Users::class, ['id' => 'user_id']);
     }

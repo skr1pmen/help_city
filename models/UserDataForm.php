@@ -6,12 +6,13 @@ use yii\base\Model;
 
 class UserDataForm extends Model
 {
+    // Создание полей для формы
     public $avatar;
     public $name;
     public $surname;
     public $city;
 
-    public function rules()
+    public function rules() // Правила валидации полей
     {
         return [
             [['name', 'surname', 'city'], 'required'],
@@ -20,7 +21,7 @@ class UserDataForm extends Model
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels()  // Псевдонимы для полей
     {
         return [
             'name' => 'Имя',

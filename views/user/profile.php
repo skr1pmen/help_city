@@ -30,8 +30,8 @@ use yii\widgets\Pjax;
                     <?= $data->surname ?>
                     <?= $data->name ?>
                 </h1>
-                <span class="app">Заявок: <a
-                            href="/application/index?from_user=<?= $data->id ?>"><?= $countApplication ?></a></span>
+                <span class="app">Заявок: <adart
+                            href="/application/index?from_user=<?= $data->id ?>"><?= $countApplication ?></adart></span>
             </div>
         <?php else : ?>
             <div class="profile">

@@ -6,6 +6,7 @@ use yii\base\Model;
 
 class CreateApplicationForm extends Model
 {
+    // Создание полей для формы
     public $title;
     public $description;
     public $address;
@@ -14,7 +15,7 @@ class CreateApplicationForm extends Model
     public $photo_3;
     public $photo_4;
 
-    public function rules()
+    public function rules() // Правила валидации полей
     {
         return [
             [['title', 'description', 'address'], 'required'],
@@ -25,7 +26,7 @@ class CreateApplicationForm extends Model
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels()  // Псевдонимы для полей
     {
         return [
             'title' => 'Заголовок',

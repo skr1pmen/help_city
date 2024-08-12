@@ -8,6 +8,7 @@ use yii\base\Model;
 
 class RegistrationForm extends Model
 {
+    // Создание полей для формы
     public $email;
     public $password;
     public $repeatPassword;
@@ -15,7 +16,7 @@ class RegistrationForm extends Model
     public $surname;
     public $city;
 
-    public function rules()
+    public function rules() // Правила валидации полей
     {
         return [
             [['email', 'password', 'name', 'surname', 'city'], 'required'],
@@ -27,7 +28,7 @@ class RegistrationForm extends Model
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels()  // Псевдонимы для полей
     {
         return [
             'email' => 'Ваша почта',
@@ -39,22 +40,22 @@ class RegistrationForm extends Model
         ];
     }
 
-    public function validateEmail($attribute, $params)
+    public function validateEmail($attribute, $params) // Валидация почты
     {
-        if (!$this->hasErrors()) {
-            $user = UserRepository::getUserByEmail($this->email);
-            if ($user) {
-                $this->addError($attribute, 'Пользователь с такой почтой уже существует!');
+        if (!$this->hasErrors()) { // Проверка на наличие ошибок
+            $user = UserRepository::getUserByEmail($this->email); // Получение пользователя
+            if ($user) { // Проверка на наличие данных
+                $this->addError($attribute, 'Пользователь с такой почтой уже существует!'); // Создание ошибки
             }
         }
     }
 
-    public function validateCity($attribute, $params)
+    public function validateCity($attribute, $params) // Валидация города
     {
-        if (!$this->hasErrors()) {
-            $city = CityRepository::getCity($this->city);
-            if (empty($city)) {
-                $this->addError($attribute, 'Некорректное или неправильное название города!');
+        if (!$this->hasErrors()) { // Проверка на наличие ошибок
+            $city = CityRepository::getCity($this->city); // Получение города
+            if (empty($city)) { // Проверка на наличие данных
+                $this->addError($attribute, 'Некорректное или неправильное название города!'); // Создание ошибки
             }
         }
     }

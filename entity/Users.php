@@ -19,22 +19,22 @@ use yii\web\IdentityInterface;
  */
 class Users extends ActiveRecord implements IdentityInterface
 {
-    public static function findIdentity($id)
+    public static function findIdentity($id) // Получение данных пользователя
     {
         return new static(UserRepository::getUserById($id));
     }
 
-    public function getId()
+    public function getId() // Получение id
     {
         return $this->id;
     }
 
-    public function validatePassword($password)
+    public function validatePassword($password) // Валидация пароля
     {
         return password_verify($password, $this->password);
     }
 
-    public function findUserByEmail($email)
+    public function findUserByEmail($email) // Поиск пользователя по почте
     {
         return new static(UserRepository::getUserByEmail($email));
     }
@@ -51,7 +51,7 @@ class Users extends ActiveRecord implements IdentityInterface
     {
     }
 
-    public function getCity()
+    public function getCity() // Получение города
     {
         return $this->hasOne(Cities::class, ['city_id' => 'id']);
     }

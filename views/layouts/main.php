@@ -62,6 +62,16 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => Yii::g
                             О проекте
                         </a>
                     </li>
+                    <?php if (\Yii::$app->user->can('admin')) : ?>
+                        <li>
+                            <a draggable="false"
+                               class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'admin/admin/index' ? 'active' : null ?>"
+                               href="/admin/admin/index">
+                                <i class="fa-solid fa-hammer"></i>
+                                Админ панель
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li>
                         <a draggable="false"
                            class="<?= trim($_SERVER['REQUEST_URI'], '/') === 'user/profile' ? 'active' : null ?>"

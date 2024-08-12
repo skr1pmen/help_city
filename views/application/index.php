@@ -2,7 +2,6 @@
 /**
  * @var $applications
  */
-
 ?>
 
 <div class="page">
