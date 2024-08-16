@@ -3,6 +3,7 @@
 namespace app\modules\admin\repository;
 
 use app\entity\Applications;
+use app\entity\Statuses;
 
 class AdminRepository
 {
@@ -29,5 +30,15 @@ class AdminRepository
     public static function getCountFinishedApp()
     {
         return Applications::find()->where(['status_id' => 4])->count();
+    }
+
+    public static function getApp()
+    {
+        return Applications::find()->orderBy(['id' => SORT_DESC])->all();
+    }
+
+    public static function getStatuses()
+    {
+        return Statuses::find()->all();
     }
 }

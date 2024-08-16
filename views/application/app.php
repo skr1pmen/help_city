@@ -2,9 +2,12 @@
 /**
  * @var $app
  * @var $status
+ * @var $statusesList
  */
 
 use coderius\swiperslider\SwiperSlider;
+use yii\bootstrap5\Modal;
+use yii\widgets\Pjax;
 
 $slides = [];
 array_push($slides, "<img draggable='false' src='/images/applications/{$app->id}/{$app->id}_1.jpg'>");
@@ -50,8 +53,27 @@ if (file_exists("images/applications/{$app->id}/{$app->id}_4.jpg")) {
             <span><b>Адрес: </b><?= $app->address ?></span>
             <img draggable="false" src="/images/applications/<?= $app->id ?>/map.png" alt="">
         </div>
-        <span class="status status_<?= $app->status_id ?>"><?= $status ?></span>
-        <?php if ($app->user_id === Yii::$app->user->id): ?>
+        <span class="status status_<?= $app->status_id ?>">
+            <?= $status ?>
+            <?php if (Yii::$app->user->can('admin')): ?>
+                <?php
+                Modal::begin([
+                    'title' => '<h2>Изменение статуса</h2>',
+                    'toggleButton' => ['label' => "<i class='fa-regular fa-pen-to-square'></i>", 'class' => 'btn'],
+                ]);
+                ?>
+                <?php Pjax::begin(); ?>
+                <?php foreach ($statusesList as $key => $value): ?>
+                    <a class="btn statLink"
+                       href="/application/status?app_id=<?= $app->id ?>&status_id=<?= $key ?>"><?= $value ?></a>
+                <?php endforeach; ?>
+                <?php Pjax::end(); ?>
+                <?php
+                Modal::end();
+                ?>
+            <?php endif; ?>
+        </span>
+        <?php if ($app->user_id === Yii::$app->user->id || Yii::$app->user->can('admin')): ?>
             <div class="fun_btn">
                 <a href="/application/edit?id=<?= $app->id ?>" class="btn">Редактировать</a>
                 <a href="/application/delete?id=<?= $app->id ?>" class="btn">Удалить заявку</a>

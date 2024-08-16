@@ -657,6 +657,13 @@ main.deactivate {
 
     & .status {
         font-size: 1.3rem;
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+
+        & .statLink {
+            margin-bottom: .5rem;
+        }
     }
 
     & .status_1 {
@@ -732,5 +739,50 @@ main.deactivate {
 
     & .box:nth-child(5) {
         grid-area: 2 / 4 / 3 / 5;
+    }
+}
+
+.appTable {
+    padding: 1rem;
+    margin-top: 1.5rem;
+    width: 100%;
+
+    thead {
+        background: var(--background-color);
+
+        th {
+            padding: .25rem .5rem;
+            text-align: center;
+
+        }
+
+        th:not(:last-child) {
+            border-right: 1px solid var(--block-color);
+        }
+    }
+
+    tbody {
+        td:first-child {
+            text-align: center;
+        }
+
+        tr {
+            transition: .2s ease-in-out;
+        }
+
+        tr:nth-child(even) {
+            background: var(--background-color);
+        }
+
+        tr:hover {
+            cursor: pointer;
+            background: var(--accent-color);
+            color: var(--btn-text-color);
+        }
+
+        img {
+            width: 150px;
+            aspect-ratio: 1;
+        }
     }
 }

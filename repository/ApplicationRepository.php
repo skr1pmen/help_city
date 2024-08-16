@@ -51,4 +51,11 @@ class ApplicationRepository
         $application->is_visible = false; // Изменение данных заявки
         $application->update(); // Сохранение изменений
     }
+
+    public static function setStatusApp($app_id, $status_id)
+    {
+        $application = ApplicationRepository::getApplication($app_id); // Получение заявки
+        $application->status_id = $status_id; // Изменение данных заявки
+        $application->update(); // Сохранение изменений
+    }
 }

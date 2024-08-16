@@ -4,15 +4,42 @@ namespace app\controllers;
 
 use app\models\CreateApplicationForm;
 use app\models\EditApplicationForm;
+use app\modules\admin\repository\AdminRepository;
 use app\repository\ApplicationRepository;
 use app\repository\CityRepository;
 use app\repository\StatusRepository;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
 class ApplicationController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['status'],
+                'rules' => [
+                    [
+                        'actions' => ['status'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['create', 'edit', 'delete'],
+                        'allow' => true,
+                        'roles' => ['author', 'admin'],
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    return $this->redirect('/application/index');
+                }
+            ],
+        ];
+    }
+
     public function actionIndex($from_user = null, $city = null) // Обработчик стартовой страницы заявок
     {
         if (Yii::$app->user->isGuest) { // Проверка пользователя на авторизацию
@@ -109,9 +136,15 @@ class ApplicationController extends Controller
     {
         $app = ApplicationRepository::getApplication($id); // Получение данных о заявке из бд
         $this->view->title = $app->title; // Выдача заголовка равной названию заявки
-        $status = StatusRepository::getStatus($app->status_id); // Получение статуса заявки
 
-        return $this->render('app', ['app' => $app, 'status' => $status]); // Возврат страницы заявки со всеми нужными данными
+        $statuses = AdminRepository::getStatuses(); // Получение всех статусов заявок
+        $statusesList = []; // Преобразование статусов в обычный массив
+        foreach ($statuses as $status) {
+            $statusesList[$status['id']] = $status['name'];
+        }
+
+        $status = StatusRepository::getStatus($app->status_id); // Получение статуса заявки
+        return $this->render('app', ['app' => $app, 'status' => $status, 'statusesList' => $statusesList]); // Возврат страницы заявки со всеми нужными данными
     }
 
     public function actionEdit($id) // Обработка страницы редактирования заявки
@@ -190,5 +223,12 @@ class ApplicationController extends Controller
         ApplicationRepository::delete($id); // Запрос на удаление заявки
 
         return $this->redirect('/application/index'); // Возврат пользователя на страницу всех заявок
+    }
+
+    public function actionStatus($app_id, $status_id) // Обработка изменения статуса заявки
+    {
+        ApplicationRepository::setStatusApp($app_id, $status_id); // Метод изменения статуса
+
+        return $this->redirect('/application/app?id=' . $app_id); // Возврат пользователя на страницу заявки
     }
 }
