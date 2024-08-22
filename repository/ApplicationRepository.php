@@ -14,9 +14,9 @@ class ApplicationRepository
     public static function getAllApplication($user_id, $city_id) // Получение всех заявок (если есть user_id, то сортировка по нему. Если нет, то глобально)
     {
         if ($user_id) {
-            return Applications::find(['user_id' => $user_id, 'city_id' => $city_id, 'is_visible' => true])->orderBy(['id' => SORT_DESC])->all();
+            return Applications::findAll(['user_id' => $user_id, 'city_id' => $city_id, 'is_visible' => true]);
         }
-        return Applications::find(['city_id' => $city_id, 'is_visible' => true])->orderBy(['id' => SORT_DESC])->all();
+        return Applications::findAll(['city_id' => $city_id, 'is_visible' => true]);
     }
 
     public static function getApplication($id) // Получение данных о заявке
