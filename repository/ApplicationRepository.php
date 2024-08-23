@@ -56,6 +56,7 @@ class ApplicationRepository
     {
         $application = ApplicationRepository::getApplication($app_id); // Получение заявки
         $application->status_id = $status_id; // Изменение данных заявки
+        $application->edit_date = Date('Y-m-d'); // Изменение даты изменения заявки
         $application->update(); // Сохранение изменений
     }
 }

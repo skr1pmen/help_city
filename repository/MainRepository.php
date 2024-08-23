@@ -14,7 +14,7 @@ class MainRepository
             $dates[] = Date('Y-m-d', strtotime("-{$i} days")); // Получение дня
         }
         foreach ($dates as $date) { // Перебор заявок
-            $createdApplication[] = count(Applications::findAll(['create_date' => $date, 'status_id' => 1])); // Получения количества заявок на каждый день
+            $createdApplication[] = count(Applications::findAll(['edit_date' => $date, 'status_id' => 1])); // Получения количества заявок на каждый день
         };
         return $createdApplication; // Возврат количества заявок
     }
@@ -27,7 +27,7 @@ class MainRepository
             $dates[] = Date('Y-m-d', strtotime("-{$i} days")); // Получение дня
         }
         foreach ($dates as $date) { // Перебор заявок
-            $processingApplication[] = count(Applications::findAll(['create_date' => $date, 'status_id' => 2])); // Получения количества заявок на каждый день
+            $processingApplication[] = count(Applications::findAll(['edit_date' => $date, 'status_id' => 2])); // Получения количества заявок на каждый день
         };
         return $processingApplication; // Возврат количества заявок
     }
@@ -40,7 +40,7 @@ class MainRepository
             $dates[] = Date('Y-m-d', strtotime("-{$i} days")); // Получение дня
         }
         foreach ($dates as $date) { // Перебор заявок
-            $atWorkApplication[] = count(Applications::findAll(['create_date' => $date, 'status_id' => 3])); // Получения количества заявок на каждый день
+            $atWorkApplication[] = count(Applications::findAll(['edit_date' => $date, 'status_id' => 3])); // Получения количества заявок на каждый день
         };
         return $atWorkApplication; // Возврат количества заявок
     }
@@ -53,7 +53,7 @@ class MainRepository
             $dates[] = Date('Y-m-d', strtotime("-{$i} days")); // Получение дня
         }
         foreach ($dates as $date) { // Перебор заявок
-            $resolvedApplication[] = count(Applications::findAll(['create_date' => $date, 'status_id' => 4])); // Получения количества заявок на каждый день
+            $resolvedApplication[] = count(Applications::findAll(['edit_date' => $date, 'status_id' => 4])); // Получения количества заявок на каждый день
         };
         return $resolvedApplication; // Возврат количества заявок
     }

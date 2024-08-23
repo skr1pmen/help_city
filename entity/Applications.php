@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  * @property integer user_id
  * @property integer status_id
  * @property string create_date
+ * @property string edit_date
  * @property integer city_id
  * @property boolean is_visible
  */
