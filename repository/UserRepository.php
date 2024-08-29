@@ -34,7 +34,7 @@ class UserRepository
         $user = UserRepository::getUserById($id); // Поиск пользователя для изменений
         $user->name = $name; // Данные для изменений
         $user->surname = $surname; // Данные для изменений
-        $user->city = $city; // Данные для изменений
+        $user->city_id = $city; // Данные для изменений
         $user->update(); // Сохранение данных
     }
 

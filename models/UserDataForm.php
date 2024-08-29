@@ -17,7 +17,7 @@ class UserDataForm extends Model
         return [
             [['name', 'surname', 'city'], 'required'],
             [['name', 'surname'], 'string', 'max' => 50],
-            ['avatar', 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, webp', 'maxSize' => 1024 * 1024 * 5],
+            ['avatar', 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, webp', 'maxSize' => 1024 * 1024 * 5],
         ];
     }
 

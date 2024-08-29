@@ -100,8 +100,9 @@ class UserController extends Controller
                     Yii::$app->user->id,
                     $edit->name,
                     $edit->surname,
-                    $edit->city,
+                    CityRepository::getCityId($edit->city),
                 ); // Изменение данных пользователя
+                Yii::$app->user->identity->city_id = CityRepository::getCityId($edit->city);
                 if (!empty($edit->avatar)) { // Проверка на наличие аватарки в форме
                     $file = Yii::$app->user->id . '.jpg'; // Выдача аватарке имя
                     $edit->avatar->saveAs("images/user_avatar/$file"); // Сохранение фотографии
