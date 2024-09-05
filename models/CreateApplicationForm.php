@@ -32,7 +32,7 @@ class CreateApplicationForm extends Model
             'title' => 'Заголовок',
             'description' => 'Описание',
             'address' => 'Адрес',
-            'photo_1' => 'Главная фотка'
+            'photo_1' => 'Главная фотография'
         ];
     }
 }
